@@ -2,20 +2,20 @@ package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.print.DocFlavor.STRING;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 
 @RestController
 public class helloWorldController {
     @GetMapping("/hello")
-    public helloWorldBen hello() {
+    public helloWorldBen helloBean() throws Exception {
         return new helloWorldBen("heloo");
     }
-    @GetMapping("/api/hello/{name}")
-    public String helloweb(@PathVariable String name) {
-        return "Hello, world!"+ name;
+
+    @GetMapping("/api/hello")
+    public ResponseEntity<String> hello() {
+        return new ResponseEntity<String>("hello",
+                HttpStatus.ACCEPTED);
     }
 }
