@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
+
+import jakarta.validation.Valid;
+
 import com.example.demo.Exception.NotFoundException;
 
 @RestController
@@ -42,7 +45,7 @@ public class UsersController {
     }
 
     @PostMapping("/addUser")
-    public void createUser(@RequestBody User user) {
+    public void createUser(@Valid @RequestBody User user) {
 
         userService.save(user);
     }

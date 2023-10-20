@@ -2,9 +2,14 @@ package com.example.demo.Entity;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+
 public class User {
     private Integer id;
+    @NotBlank
     private String name;
+    @Past
     private LocalDate birthDate;
 
     public User(Integer id, String name, LocalDate birthDate) {
