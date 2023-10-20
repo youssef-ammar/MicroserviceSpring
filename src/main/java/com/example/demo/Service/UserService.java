@@ -35,6 +35,14 @@ public class UserService {
          */
     }
 
+    public List<User> deleteById(Integer id) {
+
+        Predicate<? super User> predicate = user -> user.getId().equals(id);
+        users.removeIf(predicate);
+        return users;
+
+    }
+
     public User save(User user) {
         user.setId(++idC);
         users.add(user);
