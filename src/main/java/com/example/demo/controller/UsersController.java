@@ -29,7 +29,7 @@ public class UsersController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUser(@PathVariable Integer id) {
+    public User getUser(@PathVariable Long id) {
         User user = userService.findById(id);
         if (user == null) {
 
@@ -40,7 +40,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/users/delete/{id}")
-    public List<User> delete(@PathVariable Integer id) {
+    public List<User> delete(@PathVariable Long id) {
         return userService.deleteById(id);
     }
 

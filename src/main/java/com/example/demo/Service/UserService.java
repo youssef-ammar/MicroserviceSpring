@@ -4,49 +4,40 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import org.springframework.stereotype.Component;
+
+import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.Entity.User;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserService {
-    private static List<User> users = new ArrayList<>(20);
+    @Autowired
+    UserRepository userRepository;
 
-    private static Integer idC = 1;
-    static {
-        users.add(new User(idC, "userN1", LocalDate.now().minusYears(30)));
-        users.add(new User(++idC, "userN2", LocalDate.now().minusYears(30)));
-        users.add(new User(++idC, "userN3", LocalDate.now().minusYears(30)));
-
-    }
 
     public List<User> findAll() {
 
-        return users;
+        return userRepository.findAll();
     }
 
-    public User findById(Integer id) {
 
-        Predicate<? super User> predicate = user -> user.getId().equals(id);
-        return users.stream().filter(predicate).findFirst().orElse(null);
-        /*
-         * TODO: LEARN MORE ABOUT PREDICATE
-         * 
-         */
-    }
+public User findById(Long id) {
 
-    public List<User> deleteById(Integer id) {
+   return userRepository.findById(id).get();
+}
 
-        Predicate<? super User> predicate = user -> user.getId().equals(id);
-        users.removeIf(predicate);
-        return users;
+    public List<User> deleteById(Long id) {
+
+       userRepository.delete(userRepository.findById(id).get());
+       return userRepository.findAll();
 
     }
 
     public User save(User user) {
-        user.setId(++idC);
-        users.add(user);
-        return user;
+    return  userRepository.save(user);
+
 
     }
 
